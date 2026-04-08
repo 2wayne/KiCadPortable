@@ -7,7 +7,7 @@ ${Segment.OnInit}
 	System::Call kernel32::IsWow64Process(is,*i.r0)
 	ReadRegStr $2 HKLM "Software\Microsoft\Windows NT\CurrentVersion" "CurrentBuild"
 	
-	${If} $2 < 9200 ;Windows 8.0+
+	${If} $2 < 10000 ;Windows 10+
 	${OrIf} $0 == 0 ;or 32-bit
 		StrCpy $AppName "KiCad"
 		${If} ${IsWin2000}
@@ -35,7 +35,7 @@ ${Segment.OnInit}
 		${Else}
 			StrCpy $1 "Pre-Win10"
 		${EndIf}	
-		StrCpy $0 "8.0 64-bit"
+		StrCpy $0 "10.0 64-bit"
 		MessageBox MB_OK|MB_ICONSTOP "$(LauncherIncompatibleMinOS)"
 		Abort
 	${EndIf}
